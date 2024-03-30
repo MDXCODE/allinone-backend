@@ -2,13 +2,14 @@ const { createSuccessResponse, createErrorResponse } = require('../../../respons
 const client = require('../connection'); 
 
 module.exports = (req, res) => {
-    client.query(`SELECT * FROM "allinone-userschema"."users"`, (err, result) => {
+    var id = req.params.id;
+    client.query(`SELECT * FROM "allinone-userschema"."users" WHERE userid=${id}`, (err, result) => {
         if (err) {
-            console.error('Error executing query:', err);
+            console.error('User ID Query failed:', err);
             res.status(500).json(createErrorResponse(500, 'Internal Server Error')); 
         } else if (result.rows.length === 0) {
-            console.error('Users table query failed:', err);
-            res.status(404).json(createErrorResponse(404, `Users table is empty`));
+            console.error('User ID Query failed:', err);
+            res.status(404).json(createErrorResponse(404, `User with '${id}' doesn't exist`));
         } else {
             res.json(createSuccessResponse({ data: result.rows })); 
         }

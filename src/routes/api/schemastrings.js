@@ -5,4 +5,7 @@ var tasksSchema = `"allinone-userschema"."tasks"`
 //var tasksSchema = `"allinone-userschema"."events"`
 //var tasksSchema = `"allinone-userschema"."notes"`
 
-module.exports = usersSchema, tasksSchema;
+module.exports = {
+    usersSchema: usersSchema,
+    tasksSchema: tasksSchema
+};

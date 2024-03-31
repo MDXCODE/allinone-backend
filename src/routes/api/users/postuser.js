@@ -1,9 +1,10 @@
 const { createSuccessResponse, createErrorResponse } = require('../../../response');
 const client = require('../connection');
 const crypto = require('crypto');
+const usersSchema = require('../schemastrings');
 
 module.exports = (req, res) => {
-    
+
     const requestData = req.body; 
     const id = crypto.randomUUID();
     const email = requestData.email;
@@ -12,8 +13,8 @@ module.exports = (req, res) => {
     const lastname = requestData.lastname;
 
     client.query(
-        `INSERT INTO "allinone-userschema"."users" 
-        (userid, email, firstname, lastname, isadmin, username)
+        `INSERT INTO ${usersSchema} 
+        (user_id, email, first_name, last_name, is_admin, username)
         VALUES ($1, $2, $3, $4, false, $5)`,
         [id, email, firstname, lastname, username],
         (err, result) => {

@@ -1,10 +1,11 @@
 const { createSuccessResponse, createErrorResponse } = require('../../../response');
 const client = require('../connection'); 
+const usersSchema = require('../schemastrings');
 
 module.exports = (req, res) => {
     const id = req.params.id;
 
-    const query = `SELECT * FROM "allinone-userschema"."users" WHERE userid = $1`;
+    const query = `SELECT * FROM ${usersSchema} WHERE user_id = $1`;
     client.query(query, [id], (err, result) => {
         if (err) {
             console.error('User ID Query failed:', err);

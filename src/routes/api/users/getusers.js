@@ -1,8 +1,9 @@
 const { createSuccessResponse, createErrorResponse } = require('../../../response');
 const client = require('../connection'); 
+const usersSchema = require('../schemastrings');
 
 module.exports = (req, res) => {
-    client.query(`SELECT * FROM "allinone-userschema"."users"`, (err, result) => {
+    client.query(`SELECT * FROM ${usersSchema}`, (err, result) => {
         if (err) {
             console.error('Error executing query:', err);
             res.status(500).json(createErrorResponse(500, 'Internal Server Error')); 

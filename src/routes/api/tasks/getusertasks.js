@@ -3,7 +3,7 @@ const client = require('../connection');
 
 module.exports = (req, res) => {
     var id = req.params.id;
-    client.query('SELECT * FROM "allinone-userschema"."tasks" WHERE userid=$1', [id], (err, result) => {
+    client.query('SELECT * FROM "allinone-userschema"."tasks" WHERE user_id=$1', [id], (err, result) => {
         if (err) {
             console.error('User ID Query failed:', err);
             res.status(500).json(createErrorResponse(500, 'Internal Server Error')); 

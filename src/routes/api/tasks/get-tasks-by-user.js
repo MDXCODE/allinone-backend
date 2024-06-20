@@ -6,7 +6,7 @@ module.exports = (req, res) => {
     client.query(`SELECT * FROM "allinone-userschema"."tasks" WHERE user_id=$1`, [id], (err, result) => {
         if (err) {
             console.error('User ID Query failed:', err);
-            res.status(500).json(createErrorResponse(500, 'TASK GET BY ID: Internal Server Error')); 
+            res.status(500).json(createErrorResponse(500, 'USER TASKS GET BY ID: Internal Server Error')); 
         } else if (result.rows.length === 0) {
             console.error('User ID Query failed:', err);
             res.status(404).json(createErrorResponse(404, `User with '${id}' doesn't exist`));

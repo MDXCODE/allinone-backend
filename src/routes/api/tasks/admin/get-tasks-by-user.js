@@ -1,9 +1,10 @@
-const { createSuccessResponse, createErrorResponse } = require('../../../response');
-const client = require('../connection');
+const { createSuccessResponse, createErrorResponse } = require('../../../../response');
+const { createClient } = require('../../connection');  
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
+  const client = await createClient();
   const userId = req.user.user_id; 
-  console.log(`Extracted user ID from token: ${userId}`);
+  //console.log(`Extracted user ID from token: ${userId}`);
   client.query('SELECT * FROM "allinone-userschema"."tasks" WHERE user_id=$1', [userId], (err, result) => {
     if (err) {
       console.error('User ID Query failed:', err);

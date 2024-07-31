@@ -1,7 +1,8 @@
-const { createSuccessResponse, createErrorResponse } = require('../../../response');
-const client = require('../connection'); 
+const { createSuccessResponse, createErrorResponse } = require('../../../../response');
+const { createClient } = require('../../connection');  
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
+    const client = await createClient();
     client.query(`SELECT * FROM "allinone-userschema"."notes"`, (err, result) => {
         if (err) {
             console.error('Error executing query:', err);

@@ -1,26 +1,19 @@
-// tests/unit/health.test.js
-
 const request = require('supertest');
-
-// Get our Express app object (we don't need the server part)
 const app = require('../../src/app');
-
-// Get the version and author from our package.json
+const { createClient } = require('../../src/routes/api/connection');
 const { version, author } = require('../../package.json');
 
 describe('/ health check', () => {
+  let db;
 
-    let db;
+  beforeAll(async () => {
+    db = await createClient();
+  });
 
-    beforeAll(async () => {
-      db = require('../../src/routes/api/connection');
-    });
-  
-    afterAll(async () => {
-      await db.end();
-    });
+  afterAll(async () => {
+    await db.end();
+  });
 
-    
   test('should return HTTP 200 response', async () => {
     const res = await request(app).get('/');
     expect(res.statusCode).toBe(200);

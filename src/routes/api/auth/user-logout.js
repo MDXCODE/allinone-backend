@@ -1,8 +1,9 @@
 const { createSuccessResponse, createErrorResponse } = require('../../../response');
 const jwt = require('jsonwebtoken');
-const client = require('../connection');  
+const { createClient } = require('../connection');  
 
 module.exports = async (req, res) => {
+  const client = await createClient();
   const token = req.headers.authorization?.split(' ')[1]; 
 
   if (!token) {

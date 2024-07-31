@@ -1,6 +1,6 @@
 const { createSuccessResponse, createErrorResponse } = require('../../../response');
 const bcrypt = require('bcrypt');
-const client = require('../connection');  
+const { createClient } = require('../connection');  
 const jwt = require('jsonwebtoken');
 
 module.exports = async (req, res) => {
@@ -9,6 +9,8 @@ module.exports = async (req, res) => {
   if (!user_name || !user_pass) {
     return res.status(400).json(createErrorResponse(400, 'Username and password are required'));
   }
+
+  const client = await createClient();
 
   try {
     const query = 'SELECT * FROM "allinone-userschema"."users" WHERE user_name = $1';

@@ -1,18 +1,16 @@
 const request = require('supertest');
 const app = require('../../src/app');
-const { version, author } = require('../../package.json');
+const { createClient, closeClient } = require('../../src/routes/api/connection');
 
 describe('/ health check', () => {
-  let db;
+   let client;
 
   beforeAll(async () => {
-    // Open the database connection
-    db = require('../../src/routes/api/connection');
+    client = await createClient();
   });
 
   afterAll(async () => {
-    // Close the database connection after all tests are done
-    await db.end();
+    await closeClient();
   });
 
   describe('GET /users', () => {
@@ -24,7 +22,7 @@ describe('/ health check', () => {
   });
 
   describe('GET /tasks', () => {
-    it('should respond with status 200 and return an array of users', async () => {
+    it('should respond with status 200 and return an array of tasks', async () => {
       const response = await request(app).get('/api/tasks');
       expect(response.status).toBe(200);
       expect(Array.isArray(response.body.data)).toBe(true);

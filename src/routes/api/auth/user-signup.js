@@ -1,9 +1,11 @@
 const { createSuccessResponse, createErrorResponse } = require('../../../response');
 const bcrypt = require('bcrypt');
-const client = require('../connection');
+const { createClient } = require('../connection');  
 const crypto = require('crypto');
 
 module.exports = async (req, res) => {
+    const client = await createClient();
+    
     const { user_name, user_pass, user_email, user_first_name, user_last_name } = req.body;
 
     if (!user_name || !user_pass || !user_email || !user_first_name || !user_last_name) {

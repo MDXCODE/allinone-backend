@@ -1,9 +1,11 @@
 const { createSuccessResponse, createErrorResponse } = require('../../../../response');
-const client = require('../../connection');
+const { createClient } = require('../../connection');  
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
+    const client = await createClient();
+    
     const requestData = req.body; 
     const id = crypto.randomUUID();
     const username = requestData.user_name;

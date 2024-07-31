@@ -1,9 +1,10 @@
 const { createSuccessResponse, createErrorResponse } = require('../../../../response');
-const client = require('../../connection');
+const { createClient } = require('../../connection');  
 
 module.exports = async (req, res) => {
   const userId = req.user.user_id;  
-
+  const client = await createClient();
+  
   try {
     const query = `SELECT * FROM "allinone-userschema"."users" WHERE user_id = $1`;
     const result = await client.query(query, [userId]);

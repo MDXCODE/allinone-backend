@@ -1,8 +1,8 @@
-const { createSuccessResponse, createErrorResponse } = require('../../../response');
-const client = require('../connection');
+const { createSuccessResponse, createErrorResponse } = require('../../../../response');
+const { createClient } = require('../../connection');  
 
-module.exports = (req, res) => {
-
+module.exports = async (req, res) => {
+    const client = await createClient();
     const requestData = req.body; 
     const taskid = crypto.randomUUID();
     const userid = requestData.user_id;

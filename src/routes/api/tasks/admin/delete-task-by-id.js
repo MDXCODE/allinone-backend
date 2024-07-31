@@ -1,7 +1,8 @@
-const { createSuccessResponse, createErrorResponse } = require('../../../response');
-const client = require('../connection');
+const { createSuccessResponse, createErrorResponse } = require('../../../../response');
+const { createClient } = require('../../connection');  
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
+    const client = await createClient();
     var id = req.params.id;
     client.query(`DELETE FROM "allinone-userschema"."tasks" WHERE task_id = $1;`, [id], (err, result) => {
         if (err) {

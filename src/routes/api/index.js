@@ -12,32 +12,34 @@ router.post('/logout', require('./auth/user-logout'));
 //router.use(isUser);
 
 // Users routes 
-router.get('/users/details', isUser, require('./users/userroute/get-user-details'));
-router.put('/users/update', isUser, require('./users/userroute/update-user-details'));
+router.get('/users/details', isUser, require('./users/user/get-user-details'));
+router.put('/users/update', isUser, require('./users/user/update-user-details'));
 
 // Tasks
-router.get('/tasks/usertasks', isUser, require('./tasks/get-tasks-by-user')); 
-router.get('/tasks/:id', isUser, require('./tasks/get-task-by-task-id'));  
-router.post('/tasks', isUser, require('./tasks/post-user-tasks'));
-router.put('/tasks/:id', isUser, require('./tasks/update-task-by-id'));
-router.delete('/tasks/:id', isUser, require('./tasks/delete-task-by-id'));
+// will need a route to get a specific users tasks
 
 
 // Notes 
-router.get('/notes/usernotes', isUser, require('./notes/get-notes-by-user'));
-router.post('/notes', isUser, require('./notes/post-user-note'));
+// will need a route to get a specific users notes
 
 // Admin-protected routes
 //router.use(isAdmin);
 
-router.get('/admin/users', isUser, isAdmin, require('./users/adminroute/get-all-users'));
-router.post('/admin/users', isUser, isAdmin, require('./users/adminroute/post-user'));
-router.get('/admin/users/:id', isUser, isAdmin, require('./users/adminroute/get-user-by-id'));
-router.delete('/admin/users/:id', isUser, isAdmin, require('./users/adminroute/delete-user-by-id'));
-router.put('/admin/users/:id', isUser, isAdmin, require('./users/adminroute/update-user-by-id'));
+router.get('/admin/users', isUser, isAdmin, require('./users/admin/get-all-users'));
+router.post('/admin/users', isUser, isAdmin, require('./users/admin/post-user'));
+router.get('/admin/users/:id', isUser, isAdmin, require('./users/admin/get-user-by-id'));
+router.delete('/admin/users/:id', isUser, isAdmin, require('./users/admin/delete-user-by-id'));
+router.put('/admin/users/:id', isUser, isAdmin, require('./users/admin/update-user-by-id'));
 
-router.get('/admin/tasks', isUser, isAdmin, require('./tasks/adminroute/get-all-tasks')); 
+router.get('/admin/tasks', isUser, isAdmin, require('./tasks/admin/get-all-tasks')); 
+router.get('/admin/tasks/usertasks', isUser, isAdmin, require('./tasks/admin/get-tasks-by-user')); 
+router.get('/admin/tasks/:id', isUser, isAdmin, require('./tasks/admin/get-task-by-task-id'));  
+router.post('/admin/tasks', isUser, isAdmin, require('./tasks/admin/post-user-tasks'));
+router.put('/admin/tasks/:id', isUser, isAdmin, require('./tasks/admin/update-task-by-id'));
+router.delete('/admin/tasks/:id', isUser, isAdmin, require('./tasks/admin/delete-task-by-id'));
 
-router.get('/admin/notes', isUser, isAdmin, require('./notes/get-all-user-notes')); 
+router.get('/admin/notes', isUser, isAdmin, require('./notes/admin/get-all-user-notes')); 
+router.get('/admin/notes/usernotes', isUser, isAdmin, require('./notes/admin/get-notes-by-user'));
+router.post('/admin/notes', isUser, isAdmin, require('./notes/admin/post-user-note'));
 
 module.exports = router;

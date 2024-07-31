@@ -1,8 +1,9 @@
 const { createSuccessResponse, createErrorResponse } = require('../../../../response');
-const client = require('../../connection');
+const { createClient } = require('../../connection');  
 const bcrypt = require('bcrypt');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
+    const client = await createClient();
     //console.log('this is being hit');
     const userIdFromToken = req.user.user_id; 
     const { 

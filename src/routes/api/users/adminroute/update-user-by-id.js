@@ -1,5 +1,5 @@
-const { createSuccessResponse, createErrorResponse } = require('../../../response');
-const client = require('../connection');
+const { createSuccessResponse, createErrorResponse } = require('../../../../response');
+const client = require('../../connection');
 const bcrypt = require('bcrypt');
 
 module.exports = (req, res) => {

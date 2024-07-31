@@ -2,16 +2,16 @@ const { createSuccessResponse, createErrorResponse } = require('../../../respons
 const client = require('../connection');
 
 module.exports = (req, res) => {
-    var id = req.params.id;
-    client.query(`SELECT * FROM "allinone-userschema"."tasks" WHERE user_id=$1`, [id], (err, result) => {
-        if (err) {
-            console.error('User ID Query failed:', err);
-            res.status(500).json(createErrorResponse(500, 'USER TASKS GET BY ID: Internal Server Error')); 
-        } else if (result.rows.length === 0) {
-            console.error('User ID Query failed:', err);
-            res.status(404).json(createErrorResponse(404, `User with '${id}' doesn't exist`));
-        } else {
-            res.json(createSuccessResponse({ data: result.rows })); 
-        }
-    });
+  const userId = req.user.user_id; 
+  console.log(`Extracted user ID from token: ${userId}`);
+  client.query('SELECT * FROM "allinone-userschema"."tasks" WHERE user_id=$1', [userId], (err, result) => {
+    if (err) {
+      console.error('User ID Query failed:', err);
+      return res.status(500).json(createErrorResponse(500, 'USER TASKS GET BY ID: Internal Server Error'));
+    }
+    if (result.rows.length === 0) {
+      return res.status(404).json(createErrorResponse(404, `No tasks found for user with ID '${userId}'`));
+    }
+    res.json(createSuccessResponse({ data: result.rows }));
+  });
 };

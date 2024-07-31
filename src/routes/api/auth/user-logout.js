@@ -1,9 +1,9 @@
 const { createSuccessResponse, createErrorResponse } = require('../../../response');
 const jwt = require('jsonwebtoken');
-const client = require('../connection');  // Ensure this file correctly exports the PostgreSQL client
+const client = require('../connection');  
 
 module.exports = async (req, res) => {
-  const token = req.headers.authorization?.split(' ')[1];  // Extract token from Authorization header
+  const token = req.headers.authorization?.split(' ')[1]; 
 
   if (!token) {
     return res.status(400).json(createErrorResponse(400, 'Token is required'));
@@ -13,11 +13,11 @@ module.exports = async (req, res) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const { user_id, user_name, user_email } = decoded;
+    const { user_id, user_name, user_email, user_is_admin } = decoded;
 
     res.json(createSuccessResponse({
       message: 'Logged out successfully',
-      user: { user_id, user_name, user_email }
+      user: { user_id, user_name, user_email, user_is_admin }
     }));
 
 

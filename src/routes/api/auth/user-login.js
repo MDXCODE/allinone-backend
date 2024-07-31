@@ -1,6 +1,6 @@
 const { createSuccessResponse, createErrorResponse } = require('../../../response');
 const bcrypt = require('bcrypt');
-const client = require('../connection');  // Ensure this file correctly exports the PostgreSQL client
+const client = require('../connection');  
 const jwt = require('jsonwebtoken');
 
 module.exports = async (req, res) => {
@@ -31,14 +31,21 @@ module.exports = async (req, res) => {
     }
 
      const token = jwt.sign(
-        { user_id: user.user_id, user_name: user.user_name, user_email: user.user_email, user_is_admin: user.user_is_admin },
+        { 
+          user_id: user.user_id, 
+          user_name: user.user_name, 
+          user_email: user.user_email, 
+          user_is_admin: user.user_is_admin 
+        },
         process.env.JWT_SECRET,  
-        { expiresIn: '30s' }  
+        { 
+          expiresIn: '2m' 
+        }  
       );
   
       res.json(createSuccessResponse({ token, user }));
   } catch (err) {
-    console.error('Login Query failed:', err);
+    console.error('Login failed:', err);
     res.status(500).json(createErrorResponse(500, 'Internal Server Error'));
   }
 };

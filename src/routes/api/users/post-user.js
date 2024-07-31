@@ -11,7 +11,7 @@ module.exports = (req, res) => {
     const email = requestData.user_email;
     const firstname = requestData.user_first_name; 
     const lastname = requestData.user_last_name; 
-    const isAdmin = false;
+    const isAdmin = requestData.user_is_admin;
 
     bcrypt.hash(password, 10, (err, hashedPassword) => {
         if (err) {

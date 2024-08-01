@@ -4,6 +4,7 @@ const { createClient } = require('../connection');
 const crypto = require('crypto');
 
 module.exports = async (req, res) => {
+    console.log('Cookies received:', req.cookies);
     const client = await createClient();
     
     const { user_name, user_pass, user_email, user_first_name, user_last_name } = req.body;

@@ -32,20 +32,27 @@ module.exports = async (req, res) => {
       return res.status(401).json(createErrorResponse(401, 'Invalid credentials'));
     }
 
-     const token = jwt.sign(
-        { 
-          user_id: user.user_id, 
-          user_name: user.user_name, 
-          user_email: user.user_email, 
-          user_is_admin: user.user_is_admin 
-        },
-        process.env.JWT_SECRET,  
-        { 
-          expiresIn: '2m' 
-        }  
-      );
-  
-      res.json(createSuccessResponse({ token, user }));
+    const token = jwt.sign(
+      { 
+        user_id: user.user_id, 
+        user_name: user.user_name, 
+        user_email: user.user_email, 
+        user_is_admin: user.user_is_admin 
+      },
+      process.env.JWT_SECRET,  
+      { 
+        expiresIn: '20m' 
+      }
+    );
+
+    res.cookie('authToken', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', 
+      sameSite: 'Lax', 
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) 
+    });
+    
+    res.json(createSuccessResponse({ token, user }));
   } catch (err) {
     console.error('Login failed:', err);
     res.status(500).json(createErrorResponse(500, 'Internal Server Error'));

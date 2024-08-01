@@ -4,9 +4,10 @@ const { isUser } = require('../../middleware/user-auth-middleware');
 const { isAdmin } = require('../../middleware/admin-auth-middleware'); 
 
 // Public routes
-router.post('/login', require('./auth/user-login'));
-router.post('/signup', require('./auth/user-signup'));
-router.post('/logout', require('./auth/user-logout'));
+router.get('/auth/check', isUser, require('./auth/user-check'));
+router.post('/auth/login', require('./auth/user-login'));
+router.post('/auth/signup', require('./auth/user-signup'));
+router.post('/auth/logout', require('./auth/user-logout'));
 
 // User protected routes
 //router.use(isUser);

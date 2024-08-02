@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     const cookieToken = req.cookies.authToken;
     
     const token = cookieToken;
-    console.log('Token:', token);
+   // console.log('Token:', token);
 
     if (!token || token === undefined || token === '') {
       console.log('No token found');

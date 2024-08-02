@@ -7,7 +7,7 @@ const { isAdmin } = require('../../middleware/admin-auth-middleware');
 router.get('/auth/check', isUser, require('./auth/user-check'));
 router.post('/auth/login', require('./auth/user-login'));
 router.post('/auth/signup', require('./auth/user-signup'));
-router.post('/auth/logout', require('./auth/user-logout'));
+router.post('/auth/logout',  require('./auth/user-logout'));
 
 // User protected routes
 //router.use(isUser);

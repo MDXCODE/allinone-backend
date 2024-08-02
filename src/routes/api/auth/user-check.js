@@ -4,6 +4,11 @@ const { createClient } = require('../connection');
 
 module.exports = async (req, res) => {
   try {
+    console.log(' ');
+    console.log(' ');
+    console.log('----------------------');
+    console.log('AUTH CHECK')
+    console.log('----------------------');
     console.log('Received authToken:', req.cookies.authToken);
     console.log('Request received for user-check');
 

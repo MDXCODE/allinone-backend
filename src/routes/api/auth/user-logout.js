@@ -4,6 +4,13 @@ const { createClient } = require('../connection');
 
 module.exports = async (req, res) => {
   const token = req.cookies.authToken;
+  console.log(' ');
+  console.log(' ');
+  console.log('----------------------');
+  console.log('LOGOUT')
+  console.log('----------------------');
+
+  console.log('Auth Token Received: ', req.cookies.authToken);
 
   if (!token) {
     console.error('No token provided');
@@ -21,7 +28,8 @@ module.exports = async (req, res) => {
       path: '/'
     });
 
-    console.log('Cookie cleared successfully');
+    console.log('Token cookie cleared successfully');
+    console.log(`User (${decoded.user_name}) has logged out`);
 
     res.json(createSuccessResponse({
       message: 'Logged out successfully',

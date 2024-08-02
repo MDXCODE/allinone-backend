@@ -4,6 +4,12 @@ const { createClient } = require('../connection');
 const jwt = require('jsonwebtoken');
 
 module.exports = async (req, res) => {
+  console.log(' ');
+  console.log(' ');
+  console.log('----------------------');
+  console.log('LOGIN')
+  console.log('----------------------');
+  
   const { user_name, user_pass } = req.body;
 
   if (!user_name || !user_pass) {
@@ -53,6 +59,8 @@ module.exports = async (req, res) => {
     });
     
     res.json(createSuccessResponse({ token, user }));
+
+    console.log(`User (${user.user_name}) logged in with Auth Token: `, token)
   } catch (err) {
     console.error('Login failed:', err);
     res.status(500).json(createErrorResponse(500, 'Internal Server Error'));

@@ -17,7 +17,7 @@ router.get('/users/details', isUser, require('./users/user/get-user-details'));
 router.put('/users/update', isUser, require('./users/user/update-user-details'));
 
 // Tasks
-// will need a route to get a specific users tasks
+// will need a route to get a tasks for the authenticated user
 
 
 // Notes 

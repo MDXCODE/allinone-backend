@@ -7,10 +7,16 @@ module.exports = async (req, res) => {
     console.log('Cookies received:', req.cookies);
     const client = await createClient();
     
-    const { user_name, user_pass, user_email, user_first_name, user_last_name } = req.body;
+    const { 
+        user_name, 
+        user_pass, 
+        user_email, 
+        user_first_name, 
+        user_last_name 
+    } = req.body;
 
-    if (!user_name || !user_pass || !user_email || !user_first_name || !user_last_name) {
-        return res.status(400).json(createErrorResponse(400, 'All fields are required'));
+    if (!user_name || !user_pass) {
+        return res.status(400).json(createErrorResponse(400, 'Missing username or password.'));
     }
 
     try {

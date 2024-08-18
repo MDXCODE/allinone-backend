@@ -47,7 +47,7 @@ module.exports = async (req, res) => {
       },
       process.env.JWT_SECRET,  
       { 
-        expiresIn: '20m' 
+        expiresIn: '7d' 
       }
     );
 

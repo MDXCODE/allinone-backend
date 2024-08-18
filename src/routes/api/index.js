@@ -16,8 +16,15 @@ router.post('/auth/logout',  require('./auth/user-logout'));
 router.get('/users/details', isUser, require('./users/user/get-user-details'));
 router.put('/users/update', isUser, require('./users/user/update-user-details'));
 
+// Projects
+router.get('/projects/userprojects', isUser, require('./projects/user/get-projects-by-user.js'));
+router.post('/projects', isUser, require('./projects/user/post-user-projects.js'));
+router.post('/projects/tasks', isUser, require('./projects/user/post-task-to-project.js'));
+router.delete('/projects', isUser, require('./projects/user/delete-project-by-id.js'))
+
 // Tasks
-// will need a route to get a tasks for the authenticated user
+router.get('/tasks/usertasks', isUser, require('./tasks/user/get-tasks-by-user')); 
+router.post('/tasks', isUser, require('./tasks/user/post-user-tasks'));
 
 
 // Notes 

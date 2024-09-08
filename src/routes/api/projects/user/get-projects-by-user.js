@@ -4,6 +4,7 @@ const { createClient } = require('../../connection');
 module.exports = async (req, res) => {
   const client = await createClient();
   const userId = req.user.user_id; 
+  
   client.query('SELECT * FROM "allinone-userschema"."projects" WHERE user_id=$1', [userId], (err, result) => {
     if (err) {
       console.error('User ID Query failed:', err);

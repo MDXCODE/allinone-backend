@@ -9,6 +9,8 @@ module.exports = async (req, res) => {
         const requestData = req.body; 
         const noteid = crypto.randomUUID();  
         const notecontent = requestData.note_content;
+        const noteTitle = requestData.note_title;
+        const today = new Date().toISOString().slice(0, 10); 
 
         const authToken = req.cookies.authToken;
 
@@ -26,8 +28,8 @@ module.exports = async (req, res) => {
         const userid = decoded.user_id;  
 
         client.query(
-            `INSERT INTO "allinone-userschema"."notes" (note_id, user_id, note_content) VALUES ($1, $2, $3)`,
-            [noteid, userid, notecontent],
+            `INSERT INTO "allinone-userschema"."notes" (note_id, user_id, note_content, note_created_date, note_title) VALUES ($1, $2, $3, $4, $5)`,
+            [noteid, userid, notecontent, today, noteTitle],
             (err, result) => {
                 if (err) {
                     console.error('Error inserting note:', err);

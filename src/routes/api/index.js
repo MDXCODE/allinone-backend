@@ -25,6 +25,8 @@ router.delete('/projects', isUser, require('./projects/user/delete-project-by-id
 // Notes
 router.get('/notes/usernotes', isUser, require('./notes/user/get-notes-by-user'));
 router.post('/notes', isUser, require('./notes/user/post-user-note'));
+router.put('/notes', isUser, require('./notes/user/edit-user-note.js'));
+router.delete('/notes', isUser, require('./notes/user/delete-user-note'));
 
 // Tasks
 router.get('/tasks/usertasks', isUser, require('./tasks/user/get-tasks-by-user')); 

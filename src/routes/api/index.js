@@ -17,27 +17,30 @@ router.get('/users/details', isUser, require('./users/user/get-user-details'));
 router.put('/users/update', isUser, require('./users/user/update-user-details'));
 
 // Projects
-router.get('/projects/userprojects', isUser, require('./projects/user/get-projects-by-user.js'));
-router.post('/projects', isUser, require('./projects/user/post-user-projects.js'));
+router.get('/projects/userprojects', isUser, require('./projects/user/get-projects-by-user'));
+router.post('/projects', isUser, require('./projects/user/post-user-project'));
 //router.post('/projects/tasks', isUser, require('./projects/user/post-task-to-project.js'));
-router.delete('/projects', isUser, require('./projects/user/delete-project-by-id.js'))
+router.delete('/projects', isUser, require('./projects/user/delete-project-by-id'))
 
 // Notes
 router.get('/notes/usernotes', isUser, require('./notes/user/get-notes-by-user'));
 router.post('/notes', isUser, require('./notes/user/post-user-note'));
-router.put('/notes', isUser, require('./notes/user/edit-user-note.js'));
+router.put('/notes', isUser, require('./notes/user/edit-user-note'));
 router.delete('/notes', isUser, require('./notes/user/delete-user-note'));
 
 // Tasks
 router.get('/tasks/usertasks', isUser, require('./tasks/user/get-tasks-by-user')); 
-router.post('/tasks', isUser, require('./tasks/user/post-user-tasks'));
+router.get('/tasks/completedtasks', isUser, require('./tasks/user/get-completed-tasks-by-user')); 
+router.post('/tasks', isUser, require('./tasks/user/post-user-task'));
 router.put('/tasks', isUser, require('./tasks/user/edit-user-task'));
 router.put('/tasks/complete', isUser, require('./tasks/user/complete-task'));
 router.delete('/tasks', isUser, require('./tasks/user/delete-user-task'));
 
-
-// Notes 
-// will need a route to get a specific users notes
+// Reminders
+router.get('/reminders/userreminders', isUser, require('./reminders/user/get-reminders-by-user'));
+router.post('/reminders', isUser, require('./reminders/user/post-user-reminder'));
+router.put('/reminders', isUser, require('./reminders/user/edit-user-reminder'));
+router.delete('/reminders', isUser, require('./reminders/user/delete-user-reminder'));
 
 // Admin-protected routes
 //router.use(isAdmin);
